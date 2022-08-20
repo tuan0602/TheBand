@@ -239,11 +239,11 @@
         // dừng sự kiện nổi bọt của modal khi đóng 
        
         const stopClose = (e) => e.stopPropagation();   
-        // lắng nghe sự kiện click khi bấm vào btnTikets
+        // lắng nghe sự kiện click khi mở btnTikets
         for (const btnTicket of btnTikets) {
             btnTicket.addEventListener('click', openTicketModal);
         }
-        // lắng nghe sự kiện đóng modal 
+        // lắng nghe sự kiện đóng nút modal 
         closeModal.addEventListener('click', closeTicketModal);
 
         // lắng nghe sự kiến đóng modal
@@ -257,20 +257,19 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const currentHeader = header.clientHeight ;
         
-        mobileMenu.onclick = function() { 
+        const openMenuMobile = function() { 
             var isClosed = header.clientHeight === currentHeader;
             if (isClosed) {
                 header.style.height = 'auto';
             }
             else
             header.style.height = null;
+
         }
+        mobileMenu.addEventListener('click', openMenuMobile);
         // tự đóng khi chọn menu
         var menuItems = document.querySelectorAll('#nav li a[href*="#"] ')
-        for (var menuItem of menuItems) 
-        {
-            
-            menuItem.onclick = function(e) {
+        const openMenuItem = function(e) {
                 
                 var isParent = this.nextElementSibling && this.nextElementSibling.classList.contains('subnav')
                if(isParent)
@@ -279,10 +278,14 @@
                }
                else
                {
-
+                console.log(this)
                    header.style.height = null;
                }
             }
+        for (var menuItem of menuItems) 
+        {
+            
+            menuItem.addEventListener('click', openMenuItem); 
         }
 
     </script>
